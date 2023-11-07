@@ -66,3 +66,5 @@
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
+
+처음 스택을 String으로 선언한뒤 문제로 제시된 문자열을 Split을 하여 넣었더니 시간초과가 떠서 charAt을 활용하여 시간을 줄임
