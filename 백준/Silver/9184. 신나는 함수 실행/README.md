@@ -45,3 +45,36 @@ otherwise it returns:
 
  <p>입력으로 주어진 각각의 a, b, c에 대해서, w(a, b, c)를 출력한다.</p>
 
+## 풀이 내용
+나는 재귀를 이용해서 dp라는 배열에 저장하여 값이 기억되도록 풀어 내었다. 하지만 다른풀이를 보았는데 그 풀이는 재귀를 이용하는 것이 아닌 미리 배열에 저장해놓는 방식이었다.
+public class Main {
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		int [][][] arr = new int [25][25][25];
+		for(int i=0;i<=20;i++) {
+			for(int j=0;j<=20;j++) {
+				for(int k=0;k<=20;k++) {
+					if(i==0 || j==0 || k==0)
+						arr[i][j][k]=1;
+					else
+						arr[i][j][k]=arr[i-1][j][k]+arr[i-1][j-1][k]+arr[i-1][j][k-1]-arr[i-1][j-1][k-1];
+				}
+			}					
+		}
+		while(true) {
+			int a=sc.nextInt(), b=sc.nextInt(),c=sc.nextInt();
+			if(a==-1 && b==-1 && c==-1)
+				break;
+			System.out.printf("w(%d, %d, %d) = ",a,b,c);
+			if(a<1 || b<1 || c<1)
+				a=b=c=0;
+			else if(a>20 || b>20 || c>20)
+				a=b=c=20;
+			System.out.printf("%d\n",arr[a][b][c]);
+		}	
+	}
+}
+
+문제에서 a,b,c중 하나라도 0이면 1이고, 하나라도 20을 넘으면 세개의 숫자 모두 20으로 하는것이니 21,21,21삼중배열을 미리 선언하여 값을 넣는 것이었다.
+이렇게 하면 전체 배열을 우선적으로 다 계산을 해야하기때문에 재귀를 활용하는것보다는 더 걸리지만 문제를 이렇게 이해 할 수 있음에 놀랐다
+
