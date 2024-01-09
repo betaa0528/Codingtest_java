@@ -47,6 +47,7 @@ otherwise it returns:
 
 ## 풀이 내용
 나는 재귀를 이용해서 dp라는 배열에 저장하여 값이 기억되도록 풀어 내었다. 하지만 다른풀이를 보았는데 그 풀이는 재귀를 이용하는 것이 아닌 미리 배열에 저장해놓는 방식이었다.
+```java
 public class Main {
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
@@ -74,7 +75,7 @@ public class Main {
 		}	
 	}
 }
-
+```
 문제에서 a,b,c중 하나라도 0이면 1이고, 하나라도 20을 넘으면 세개의 숫자 모두 20으로 하는것이니 21,21,21삼중배열을 미리 선언하여 값을 넣는 것이었다.
 이렇게 하면 전체 배열을 우선적으로 다 계산을 해야하기때문에 재귀를 활용하는것보다는 더 걸리지만 문제를 이렇게 이해 할 수 있음에 놀랐다
 
