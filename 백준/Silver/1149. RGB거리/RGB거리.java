@@ -24,24 +24,13 @@ public class Main {
         dp[0][1] = houses[0][1];
         dp[0][2] = houses[0][2];
         for (int i = 1; i < len; i++) {
-            color(i, 0);
-            color(i, 1);
-            color(i, 2);
+            dp[i][0] = houses[i][0] + Math.min(dp[i-1][1], dp[i-1][2]);
+            dp[i][1] = houses[i][1] + Math.min(dp[i-1][0], dp[i-1][2]);
+            dp[i][2] = houses[i][2] + Math.min(dp[i-1][0], dp[i-1][1]);
         }
         int answer = Math.min(dp[len - 1][0], Math.min(dp[len - 1][1], dp[len - 1][2]));
         System.out.println(answer);
     }
 
-    static int color(int row, int col) {
-        if (dp[row][col] == 0) {
-            if (col == 0) {
-                dp[row][col] = houses[row][col] + Math.min(color(row - 1, 1), color(row - 1, 2));
-            } else if (col == 1) {
-                dp[row][col] = houses[row][col] + Math.min(color(row - 1, 0), color(row - 1, 2));
-            } else {
-                dp[row][col] = houses[row][col] + Math.min(color(row - 1, 0), color(row - 1, 1));
-            }
-        }
-        return dp[row][col];
-    }
+   
 }
