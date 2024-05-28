@@ -65,5 +65,13 @@
 <li>15,000원은 아이스 아메리카노 두 잔을 살 수 있고 잔돈은 4,000원입니다.</li>
 </ul>
 
+<b>divmod(a, b)는 2개의 숫자 a, b를 입력으로 받는다. 그리고 a를 b로 나눈 몫과 나머지를 튜플로 리턴한다.</b>
+```
+def solution(money):
+    a,b = divmod(money,5500)
+    return [a,b]
+```
+이렇게 쓸 수도 있음
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
