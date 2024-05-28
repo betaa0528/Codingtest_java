@@ -67,5 +67,20 @@
 <li>9, -1, 0을 오름차순 정렬하면 -1, 0, 9이고 가장 중앙에 위치하는 값은 0입니다.</li>
 </ul>
 
+```
+def solution(array):
+    array.sort()
+    l = int(len(array)/2)
+    return array[l]
+```
+기본적으로는 저렇게 풀었지만 파이썬에서는 몫의 정수형만 반환하는 // 연산자도 있음을 기억해야한다.
+
+```
+def solution(array):
+    array.sort()
+    l = len(array)//2
+    return array[l]
+```
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
