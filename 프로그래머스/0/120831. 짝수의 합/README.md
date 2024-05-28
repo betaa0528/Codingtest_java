@@ -63,5 +63,15 @@
 <li><code>n</code>이 4이므로 2 + 4 = 6을 return 합니다.</li>
 </ul>
 
+파이썬의 for문은 range로 범위를 지정할 수 있는데 (시작번호, 끝번호, 증가하는단위)로 사용 할 수 있다.
+이 문제는 
+```
+def solution(n):
+    a=[]
+    a = [i for i in range(1, n+1, 2)]
+    return a
+```
+로도 풀수 있었다.
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
