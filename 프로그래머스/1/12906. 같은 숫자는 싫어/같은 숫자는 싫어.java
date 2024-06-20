@@ -2,23 +2,16 @@ import java.util.*;
 
 public class Solution {
     public int[] solution(int []arr) {
-        
-        ArrayList<Integer> result = new ArrayList<>();
-        int count = 0;
-        result.add(arr[count]);
-        for(int a : arr){
-            if(result.get(count) != a){
-                count++;
-                result.add(a);
+        int target = arr[0];
+        int[] answer = new int[arr.length];
+        answer[0] = arr[0];
+        int answerPointer = 1;
+        for (int num : arr) {
+            if(num != target){
+                target = num;
+                answer[answerPointer++] = num;
             }
         }
-        int[] answer = new int[result.size()];
-        
-        for(int i=0 ; i<answer.length; i++){
-            answer[i] = result.get(i);
-        }
-        
-
-        return answer;
+        return Arrays.copyOfRange(answer, 0, answerPointer);
     }
 }
