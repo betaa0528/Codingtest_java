@@ -1,14 +1,14 @@
 class Solution {
     public int solution(String[] babbling) {
         int answer = 0;
+        String[] words = {"aya", "ye", "woo", "ma"};
         for (String babble : babbling) {
-            if (babble.contains("ayaaya") || babble.contains("mama") || babble.contains("woowoo") || babble.contains("yeye")) {
-                continue;
+            for(String word : words) {
+                if(babble.contains(word + word)) {
+                    continue;
+                }
+                babble = babble.replace(word, "0");
             }
-            babble = babble.replace("aya", "0");
-            babble = babble.replace("ma", "0");
-            babble = babble.replace("woo", "0");
-            babble = babble.replace("ye", "0");
             babble = babble.replace("0", "");
             if (babble.isEmpty()) {
                 answer++;
