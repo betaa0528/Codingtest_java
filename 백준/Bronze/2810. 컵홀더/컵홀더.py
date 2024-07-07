@@ -1,0 +1,7 @@
+tc = int(input())
+seats = input()
+seats = seats.replace("S", "*S*")
+seats = seats.replace("LL", "*LL*")
+seats = seats.replace("**", "*")
+stars = seats.count("*")
+print(tc) if stars > tc else print(stars)
