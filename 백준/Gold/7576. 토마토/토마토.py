@@ -1,56 +1,43 @@
-from collections import deque
 import sys
+from collections import deque
 
 dx = [1, 0, -1, 0]
 dy = [0, 1, 0, -1]
-
-
-def bfs(oneArr, max):
-    q = deque()
-    for row, col in oneArr:
-        vis[row][col] = 0
-        q.append((row, col))
-    while q:
-        cur_x, cur_y = q.popleft()
-        # print(f'({cur_x}, {cur_y}) -> ', end='')
-        for dir in range(4):
-            nx = cur_x + dx[dir]
-            ny = cur_y + dy[dir]
-            if nx < 0 or nx >= n or ny < 0 or ny >= m:
+def bfs():
+    maxVal = 0
+    while queue:
+        row, col = queue.popleft()
+        for i in range(4):
+            if row + dx[i] < 0 or col + dy[i] < 0 or row + dx[i] >= m or col + dy[i] >= n:
                 continue
-            if vis[nx][ny] != 0 or board[nx][ny] != 0:
+            if graph[row + dx[i]][col + dy[i]] != 0:
                 continue
-            board[nx][ny] = 1
-            vis[nx][ny] = vis[cur_x][cur_y] + 1
-            max = vis[nx][ny] if vis[nx][ny] > max else max
-            q.append((nx, ny))
-    return max
+            queue.append((row + dx[i], col + dy[i]))
+            graph[row + dx[i]][col + dy[i]] = graph[row][col] + 1
+            maxVal = max(maxVal, graph[row][col] + 1)
+    return maxVal
+n, m = map(int, input().split())
+graph = []
+queue = deque()
 
+minusCnt = 0
 
-def rotten(arr):
-    for i in arr:
-        t = i.count(0)
-        if t > 0:
-            return 1
-    return 0
+for i in range(m):
+    line = list(map(int, sys.stdin.readline().split()))
+    minusCnt += line.count(-1)
+    for idx, val in enumerate(line):
+        if val == 1: queue.append((i, idx))
+    graph.append(line)
 
-m, n = map(int, input().split())
-oneArr = []
-board = []
-for i in range(n):
-    arr = list(map(int, sys.stdin.readline().split()))
-    board.append(arr)
-    for j in range(0, len(arr)):
-        if arr[j] == 1:
-            oneArr.append((i, j))
+answer = -1
 
-vis = [[0] * m for _ in range(n)]
+if queue:
+    if len(queue) + minusCnt == n * m:
+        answer = 0
 
-max = 0
-max = bfs(oneArr, max)
-
-rot = rotten(board)
-if rot == 1:
-    print(-1)
-else :
-    print(max)
+if answer == -1:
+    answer = bfs() - 1
+    for tomato in graph:
+        if 0 in tomato:
+            answer = -1
+print(answer)
