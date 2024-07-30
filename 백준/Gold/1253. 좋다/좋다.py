@@ -1,29 +1,25 @@
-import sys
-input = sys.stdin.readline
+def twoPoint(nums, n):
+    global count
+    for i in range(0, len(nums)):
+        l, r = 0, len(nums) - 1
+        while l < r:
+            sum = nums[l] + nums[r]
+            if sum == nums[i]:
+                if i == r:
+                    r -= 1
+                elif i == l:
+                    l += 1
+                else:
+                    count += 1
+                    break
+            elif sum < nums[i]:
+                l += 1
+            else:
+                r -= 1
 
-N = int(input())
+n = int(input())
 nums = list(map(int, input().split()))
 nums.sort()
 count = 0
-start = 0
-end = 0
-sum = nums[start] + nums[end]
-for i in range(0, N):
-    target = nums[i]
-    start = 0
-    end = N - 1
-    while start < end :
-        sum = nums[start] + nums[end]
-        if target == sum:
-            if i == start:
-                start += 1
-            elif i == end:
-                end -= 1
-            else:
-                count += 1
-                break
-        elif sum > target :
-            end -= 1
-        else :
-            start +=1
+twoPoint(nums, n)
 print(count)
