@@ -5,20 +5,20 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int station = Integer.parseInt(br.readLine());
-        int[] dist = new int[station-1];
-        int[] gas = new int[station];
+        long[] dist = new long[station-1];
+        long[] gas = new long[station];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i=0; i<dist.length; i++) {
-            dist[i] = Integer.parseInt(st.nextToken());
+            dist[i] = Long.parseLong(st.nextToken());
         }
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<gas.length; i++) {
-            gas[i] = Integer.parseInt(st.nextToken());
+            gas[i] = Long.parseLong(st.nextToken());
         }
-        int answer = dist[0] * gas[0];
-        int distSum = 0;
-        int min = gas[1];
-        for(int i=1; i<dist.length; i++) {
+        long answer =0;
+        long distSum = 0;
+        long min = gas[0];
+        for(int i=0; i<dist.length; i++) {
             distSum += dist[i];
             if(gas[i+1] <= min) {
                 answer += distSum * min;
@@ -26,6 +26,7 @@ public class Main {
                 min = gas[i+1];
             }
         }
+        answer += distSum * min;
         System.out.println(answer);
     }
 }
