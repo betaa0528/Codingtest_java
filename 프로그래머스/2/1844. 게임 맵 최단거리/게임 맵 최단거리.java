@@ -3,27 +3,27 @@ class Solution {
     public static int[][] dir = {{1,0}, {-1,0}, {0, 1}, {0,-1}};
     public int solution(int[][] maps) {
         Queue<int[]> queue = new ArrayDeque<>();
-        int[][] visit = new int[maps.length][maps[0].length];
+        boolean[][] visit = new boolean[maps.length][maps[0].length];
         queue.add(new int[]{0,0,1});
-        visit[0][0] = 1;
+        visit[0][0] = true;
+        int answer = -1;
         while(!queue.isEmpty()) {
-            int[] cur = queue.poll();
-            for(int i=0; i<4; i++) {
-                int nr = cur[0] + dir[i][0];
-                int nc = cur[1] + dir[i][1];
-                int dist = cur[2];
-                if(nr < 0 || nr >= maps.length || nc < 0 || nc>= maps[0].length || visit[nr][nc] == 1 || maps[nr][nc] == 0) {
+            int[] node = queue.poll();
+            int cnt = node[2];
+            if(node[0] == maps.length - 1 && node[1] == maps[node[0]].length - 1) {
+                answer = cnt;
+                break;
+            }
+            for(int i=0; i<dir.length; i++) {
+                int nr = dir[i][0] + node[0];
+                int nc = dir[i][1] + node[1];
+                if(nr < 0 || nr >= maps.length || nc < 0 || nc >= maps[nr].length || visit[nr][nc] || maps[nr][nc] == 0) {
                     continue;
                 }
-                
-                if(nr == maps.length-1 && nc == maps[0].length-1) {
-                    return dist + 1;
-                }
-                queue.add(new int[]{nr, nc, dist+1});
-                visit[nr][nc] = 1;
-
+                queue.add(new int[]{nr, nc, cnt+1});
+                visit[nr][nc] = true;
             }
         }
-        return -1;
+        return answer;
     }
 }
