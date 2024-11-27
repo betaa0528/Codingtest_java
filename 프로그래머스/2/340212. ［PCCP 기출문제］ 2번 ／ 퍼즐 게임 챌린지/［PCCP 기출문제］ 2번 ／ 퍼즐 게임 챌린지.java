@@ -4,7 +4,7 @@ class Solution {
         for(int diff : diffs) {
             max = Math.max(max , diff);
         }
-        int left = 0;
+        int left = 1;
         int right = max;
         int mid = (left + right) / 2 < 1? 1 : (left+right) / 2;
         long total = Integer.MAX_VALUE;
@@ -21,12 +21,12 @@ class Solution {
             
             if(sum > limit) {
                 left = mid + 1;
-                mid = (left + right + 1) / 2;
+                mid = (left + right) / 2;
             } else {
                 total = sum;
                 answer = Math.min(answer , mid);
                 right = mid - 1;
-                mid = (left + right + 1)/ 2;
+                mid = (left + right)/ 2;
             }
         }
         return answer;
