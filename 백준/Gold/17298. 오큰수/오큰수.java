@@ -1,49 +1,40 @@
-import java.io.*;
 import java.util.*;
-
-public class Main{
+import java.io.*;
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st;
-//        st = new StringTokenizer(br.readLine());
-        Scanner sc = new Scanner(System.in);
-        int N = Integer.parseInt(br.readLine());
-        st = new StringTokenizer(br.readLine());
-        Stack<Integer> stack = new Stack<>();
-        Stack<Integer> com = new Stack<>();
-        int[] nge = new int[N];
-        int cnt = 0;
-        while (st.hasMoreTokens()) {
-            stack.push(Integer.parseInt(st.nextToken()));
-        }
+        int n = Integer.parseInt(br.readLine());
+        int[] answer = new int[n];
+        int[] arr = new int[n];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+            if (stack.isEmpty()) {
+                stack.push(i);
+                continue;
+            }
 
-        for(int j=N-1; j>=0; j--) {
-            if(com.isEmpty()) {
-                com.push(stack.pop());
-                nge[j] = -1;
+            if (arr[stack.peek()] >= arr[i]) {
+                stack.push(i);
             } else {
-                if(com.peek() > stack.peek()) {
-                    nge[j] = com.peek();
-                } else {
-                    while(!com.isEmpty() && stack.peek() >= com.peek()){
-                        com.pop();
-                    }
-                    if(com.isEmpty()) {
-                        nge[j] = -1;
+                while (!stack.isEmpty() && arr[stack.peek()] < arr[i]) {
+                    int idx = stack.pop();
+                    answer[idx] = arr[i];
 
-                    } else {
-                        nge[j] = com.peek();
-                    }
                 }
-                com.push(stack.pop());
+                stack.push(i);
             }
         }
-        for(int n : nge) {
-            bw.write(n + " ");
+
+        while(!stack.isEmpty()) {
+            answer[stack.pop()] = -1;
+        }
+        for(int ans : answer) {
+            bw.write(ans + " ");
         }
         bw.flush();
         bw.close();
-
     }
 }
