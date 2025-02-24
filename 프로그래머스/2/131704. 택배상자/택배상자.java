@@ -9,11 +9,7 @@ class Solution {
             for(; cnt<=order[i]; cnt++) {
                 stack.push(cnt);
             }
-            if(cnt + 1 == order[i]) {
-                answer++;
-                cnt++;
-                continue;
-            }
+            
             if(!stack.isEmpty() && stack.peek() == order[i]) {
                 answer++;
                 stack.pop();
