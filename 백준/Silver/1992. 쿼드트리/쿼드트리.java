@@ -1,43 +1,45 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-public class Main{
-    static String[] square;
-    static StringBuilder answer = new StringBuilder();
-
+public class Main {
+    public static StringBuilder sb;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
-        square = new String[N];
-        for (int i = 0; i < N; i++) {
-            square[i] = br.readLine();
+        int[][] map = new int[N][N];
+        for(int i=0; i<N; i++) {
+            String str = br.readLine();
+            for(int j=0; j<str.length(); j++) {
+                map[i][j] = str.charAt(j) - '0';
+            }
         }
-        quad(N, 0, 0);
-
-        System.out.println(answer.toString());
+        quad(N, 0, 0, map);
+        System.out.println(sb.toString());
     }
 
-    private static void quad(int N, int x, int y) {
-        int zeroCnt = 0;
-        for (int i = x; i < x + N; i++) {
-            for (int j = y; j < y + N; j++) {
-                if (square[i].charAt(j) == '0') {
-                    zeroCnt++;
+    public static void quad(int N, int r, int c, int[][] map) {
+        int cnt = 0;
+        for(int i=r; i<N+r; i++) {
+            for(int j=c; j<N+c; j++) {
+                if(map[i][j] == 0) {
+                    cnt++;
                 }
             }
         }
-        if (zeroCnt == N * N) {
-            answer.append("0");
-        } else if (zeroCnt == 0) {
-            answer.append("1");
+
+        if(cnt == N*N) {
+            sb.append("0");
+        } else if(cnt == 0) {
+            sb.append("1");
         } else {
-            answer.append("(");
-            quad(N / 2, x, y);
-            quad(N / 2, x, y + N / 2);
-            quad(N / 2, x + N / 2, y);
-            quad(N / 2, x + N / 2, y + N / 2);
-            answer.append(")");
+            sb.append("(");
+            quad(N/2, r, c, map);
+            quad(N/2, r, c+N/2, map);
+            quad(N/2, r+N/2, c, map);
+            quad(N/2, r+N/2, c+N/2, map);
+            sb.append(")");
         }
     }
 }
