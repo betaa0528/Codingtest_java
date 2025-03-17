@@ -16,8 +16,8 @@ class Solution {
                 if(cnt == 1 && boxCnt == 0) return 0; 
             }
         }
-        answer = pq.poll() * pq.poll();
-        return answer;
+        
+        return pq.size() == 1 ? 0 : pq.poll() * pq.poll();
     }
     
     public static int search(int[] cards, int s) {
