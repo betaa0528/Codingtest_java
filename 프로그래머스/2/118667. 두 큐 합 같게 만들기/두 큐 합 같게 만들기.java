@@ -15,14 +15,13 @@ class Solution {
             arr[i+queue1.length] = queue2[i];
             sum2 += queue2[i];
         }
-        // System.out.println(Arrays.toString(arr));
         int s1 = 0;
         int e1 = queue1.length-1;
         int s2 = queue1.length;
         int e2 = arr.length-1;
         boolean flag = false;
         while(true) {
-            if(s1 > e1 || s2 > e2 || e1 / arr.length > 4 || e2 /arr.length > 4) {
+            if(s1 > e1 || s2 > e2 || e1 / arr.length > 3 || e2 /arr.length > 3) {
                 break;
             }
             
