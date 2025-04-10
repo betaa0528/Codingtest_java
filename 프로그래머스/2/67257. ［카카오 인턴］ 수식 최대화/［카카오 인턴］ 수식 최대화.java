@@ -18,7 +18,6 @@ class Solution {
         }
         list.add(s);
         
-        
         permutation(0, new int[3], new int[3], list);
         return answer;
     }
