@@ -11,7 +11,6 @@ class Solution {
                 continue;
             }
             if(arr[i] > 1) {
-                // System.out.println("갯수가 1보다 많음" + arr[i] +" ," + combi(arr[i], 2));
                 answer += (long) arr[i] * (arr[i] - 1) / 2;
             }
             for(int j=4; j>=3; j--) {
